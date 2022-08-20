@@ -65,17 +65,11 @@
 
                 <h2>GPIOs</h2><br>
 
+
                 <form id="form_control" action="control.php" method="post">
                     <input type="hidden" name="action" value="form_control">
                     <input type="hidden" name="gpio" value="0">
-                    <!-- bootstrap button -->
-                    <button type="button" class="btn btn-secondary btn-lg">1</button>
-                    <button type="button" class="btn btn-secondary btn-lg">2</button>
-                    <button type="button" class="btn btn-secondary btn-lg">3</button>
-                    <button type="button" class="btn btn-secondary btn-lg">4</button>
-                    <button type="button" class="btn btn-secondary btn-lg">5</button>
-                    <button type="button" class="btn btn-secondary btn-lg">6</button>
-                    <button type="button" class="btn btn-secondary btn-lg">7</button>
+                    <?php include 'form_buttons.php'; ?>
                 </form>
 
                 <br><br>
@@ -84,7 +78,7 @@
     </div>
 
     <footer class="container-fluid">
-        <p>Footer Text</p>
+        <p><a href="https://joel.cool">joel.cool</a></p>
     </footer>
 
 </body>
