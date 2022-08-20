@@ -12,6 +12,47 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- include script.js -->
     <script src="script.js"></script>
+    <script>
+        // When DOM is loaded this 
+        // function will get executed
+        $(() => {
+            // function will get executed 
+            // on click of submit button
+            $("#form_control .btn").click(function() {
+                var form = $("#form_control");
+                var url = form.attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: "control.php",
+                    data: form.serialize(),
+                    success: function(data) {
+                        
+                        // Ajax call completed successfully
+                        alert("success");
+                    },
+                    error: function(data) {
+                        
+                        // Some error in ajax call
+                        alert("Error");
+                    }
+                });
+            });
+        });
+
+        $('#form_control .btn').click(function() {
+            $.ajax({
+                url: 'control.php',
+                type: 'POST',
+                data: form.serialize(),
+                success: function(msg) {
+                    alert('success');
+                },
+                error: function(data) {
+                    alert("Error");
+                }              
+            });
+        });
+    </script>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
         .row.content {
@@ -66,7 +107,7 @@
                 <h2>GPIOs</h2><br>
 
 
-                <form id="form_control" action="control.php" method="post">
+                <form id="form_control" action="">
                     <input type="hidden" name="action" value="form_control">
                     <input type="hidden" name="gpio" value="0">
                     <?php include 'form_buttons.php'; ?>
