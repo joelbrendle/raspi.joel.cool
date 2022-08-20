@@ -28,14 +28,22 @@
                     success: function(data) {
                         
                         // Ajax call completed successfully
-                        alert("success");
+                        console.log("success");
                     },
                     error: function(data) {
                         
                         // Some error in ajax call
-                        alert("Error");
+                        console.log("Error");
                     }
                 });
+
+                // check if button has class btn-success
+                // if no, change to btn-success
+                if ($(this).hasClass("btn-success")) {
+                    $(this).removeClass("btn-success");
+                } else {
+                    $(this).addClass("btn-success");
+                }
             });
         });
 
@@ -106,8 +114,8 @@
 
                 <h2>GPIOs</h2><br>
 
-
-                <form id="form_control" action="">
+                <iframe name="votar" style="display:none;"></iframe>
+                <form id="form_control" action="" methode="POST" target="votar">
                     <input type="hidden" name="action" value="form_control">
                     <input type="hidden" name="gpio" value="0">
                     <?php include 'form_buttons.php'; ?>
