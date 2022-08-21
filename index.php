@@ -18,8 +18,26 @@
         $(() => {
             // function will get executed 
             // on click of submit button
-            $("#form_control .btn").click(function() {
+            $("#form_control .btn, #form_motor .btn").click(function() {
                 var form = $("#form_control");
+                var url = form.attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: "control.php",
+                    data: form.serialize(),
+                    success: function(data) {
+                        
+                        // Ajax call completed successfully
+                        console.log("success");
+                    },
+                    error: function(data) {
+                        
+                        // Some error in ajax call
+                        console.log("Error");
+                    }
+                });
+                
+                var form = $("#form_motor");
                 var url = form.attr('action');
                 $.ajax({
                     type: "POST",
@@ -47,7 +65,7 @@
             });
         });
 
-        $('#form_control .btn').click(function() {
+        $('#form_control .btn, #form_motor .btn').click(function() {
             $.ajax({
                 url: 'control.php',
                 type: 'POST',
@@ -101,10 +119,8 @@
             <div class="col-sm-3 sidenav"><br>
                 <h4>Joel Raspi</h4><br>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#section1">Home</a></li>
-                    <!-- <li><a href="#section2">Friends</a></li>
-                    <li><a href="#section3">Family</a></li>
-                    <li><a href="#section3">Photos</a></li> -->
+                    <li class="active"><a href="#section1">GPIOs</a></li>
+                    <li><a href="#section2">Motor</a></li>
                 </ul>
             </div>
 
@@ -112,17 +128,57 @@
                 <h4><small>Joel Raspberry Pi Controller</small></h4>
                 <hr>
 
-                <h2>GPIOs</h2><br>
+                <div id="section1">
+                    <h2>GPIOs</h2><br>
 
-                <iframe name="votar" style="display:none;"></iframe>
-                <form id="form_control" action="" methode="POST" target="votar">
-                    <input type="hidden" name="action" value="form_control">
-                    <input type="hidden" name="gpio" value="0">
-                    <?php include 'form_buttons.php'; ?>
-                </form>
+                    <iframe name="gpios1" style="display:none;"></iframe>
+                    <form id="form_control" action="" method="POST" target="gpios1">
+                        <input type="hidden" name="action" value="form_control">
+                        <input type="hidden" name="gpio" value="0">
+                        <?php include 'form_buttons.php'; ?>
+                    </form>
+                </div>
 
+                <br><hr><br>
+
+
+                <div id="section2">
+                    <h2>Motor</h2><br>
+
+
+                    <iframe name="motor_control" style="display:none;"></iframe>
+                    <form id="form_motor" action="control.php" method="POST" target="motor_control">
+                        <h4>Status</h4>
+                        <input type="hidden" name="action" value="form_motor">
+                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="speed" value="0">
+                        <input type="hidden" name="direction" value="0">
+
+                        <button type="button" class="status btn btn-secondary btn-lg">on</button>
+                        <button type="button" class="status btn btn-secondary btn-lg">off</button>
+
+                        <br><br>
+
+                        <h4>Speed</h4>
+
+                        <button type="button" class="speed btn btn-secondary btn-lg">25</button>
+                        <button type="button" class="speed btn btn-secondary btn-lg">50</button>
+                        <button type="button" class="speed btn btn-secondary btn-lg">75</button>
+                        <button type="button" class="speed btn btn-secondary btn-lg">100</button>
+
+                        <br><br>
+
+                        <h4>Direction</h4>
+
+                        <button type="button" class="direction btn btn-secondary btn-lg">clockwise</button>
+                        <button type="button" class="direction btn btn-secondary btn-lg">counterclockwise</button>
+
+
+                    </form>
+                </div>
                 <br><br>
             </div>
+
         </div>
     </div>
 

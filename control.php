@@ -2,7 +2,6 @@
 
     if ($_POST && $_POST['action'] == 'form_control') {
 
-
         // get connection details from other file
         require 'db.php';
 
@@ -33,7 +32,49 @@
 
             exit();
         }
+
         $sql = "UPDATE gpios SET status = '$status' WHERE gpio_nr = '$gpio'";
+        $result = $mysqli->query($sql);
+        $mysqli->close();
+
+    }
+
+
+    if ($_POST && $_POST['action'] == 'form_motor') {
+
+
+        // get connection details from other file
+        require 'db.php';
+
+        if ($mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            exit();
+        }
+
+        $status = 0;
+        $speed = 0;
+        $direction = 0;
+
+        if ($_POST['status']) {
+            if ($_POST['status'] == 'on') {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+        }
+        if ($_POST['speed']) {
+            $speed = $_POST['speed'];
+        }
+        if ($_POST['direction']) {
+            if ($_POST['direction'] == 'clockwise') {
+                $direction = 0;
+            } else {
+                $direction = 1;
+            }
+        }
+
+
+        $sql = "UPDATE motor_control SET status = $status, speed = $speed, direction = $direction WHERE id = 1";
         $result = $mysqli->query($sql);
         $mysqli->close();
 
