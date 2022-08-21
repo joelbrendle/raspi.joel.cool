@@ -57,6 +57,16 @@
 
                 // check if button has class btn-success
                 // if no, change to btn-success
+                if ($(this).hasClass("status")) {
+                    $("button.status").removeClass("btn-success");
+                }
+                if ($(this).hasClass("speed")) {
+                    $("button.speed").removeClass("btn-success");
+                }
+                if ($(this).hasClass("direction")) {
+                    $("button.direction").removeClass("btn-success");
+                }
+                
                 if ($(this).hasClass("btn-success")) {
                     $(this).removeClass("btn-success");
                 } else {
